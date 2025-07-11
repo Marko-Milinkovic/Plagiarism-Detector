@@ -1,0 +1,54 @@
+program          = { function_definition | declaration_statement }
+
+function_definition = type IDENTIFIER '(' [ parameter { ',' parameter } ] ')' block_statement
+
+parameter        = type IDENTIFIER
+
+type             = IDENTIFIER
+
+statement        = ( declaration_statement
+                   | if_statement
+                   | while_statement
+                   | return_statement
+                   | expression_statement
+                   | block_statement )
+
+declaration_statement = type IDENTIFIER [ '=' expression ] ';'
+
+if_statement     = 'if' '(' expression ')' statement [ 'else' statement ]
+
+while_statement  = 'while' '(' expression ')' statement
+
+return_statement = 'return' [ expression ] ';'
+
+expression_statement = expression ';'
+
+block_statement  = '{' { statement } '}'
+
+// Operator Precedence Parsing (from lowest to highest)
+expression       = assignment_expression
+
+assignment_expression = conditional_expression [ ('=' | '+=' | '-=' | '*') assignment_expression ]
+
+conditional_expression = logical_or_expression [ '?' expression ':' assignment_expression ]
+
+logical_or_expression = logical_and_expression { '||' logical_and_expression }
+
+logical_and_expression = equality_expression { '&&' equality_expression }
+
+equality_expression = relational_expression { ('==' | '!=') relational_expression }
+
+relational_expression = additive_expression { ('<' | '>' | '<=' | '>=') additive_expression }
+
+additive_expression  = multiplicative_expression { ('+' | '-') multiplicative_expression }
+
+multiplicative_expression = unary_expression { ('*' | '/' | '%') unary_expression }
+
+unary_expression = ('++' | '--' | '+' | '-' | '!') unary_expression | primary_expression
+
+primary_expression = ( IDENTIFIER [ '(' [ expression { ',' expression } ] ')' ] // Function call or just identifier
+                     | NUMBER_LITERAL
+                     | STRING_LITERAL
+                     | CHAR_LITERAL
+                     | '(' expression ')'
+                     )
