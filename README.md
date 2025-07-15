@@ -16,8 +16,6 @@
 
 This project implements a robust C++ code plagiarism detection system. Unlike simple text-based comparisons, this detector operates on the Abstract Syntax Tree (AST) representation of code, making it resilient to common obfuscation techniques such as variable renaming, reordering of commutative operations, and structural transformations (e.g., converting for loops to while loops). By canonicalizing the AST and applying a sophisticated polynomial hashing scheme to its subtrees, the system can accurately identify structural similarities between code snippets.
 
-This project demonstrates a strong understanding of compiler design principles (lexical analysis, parsing, AST construction), advanced data structures, hashing algorithms and similarity detection techniques
-
 ## Key Features
 
 - **AST-Based Analysis:** Goes beyond simple text comparison by analyzing the structural representation of code through Abstract Syntax Trees
